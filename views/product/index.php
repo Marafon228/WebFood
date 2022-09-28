@@ -33,13 +33,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'Name',
             'Description:ntext',
             'Price',
-            'Image',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Product $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'Id' => $model->Id]);
-                 }
+                'attribute' => 'Image',
+                'format' => 'row',
+                'content' => function($data){
+                    return '<img src="data:image/png;base64,'.base64_encode($data->Image).'" />';
+                }
             ],
+
+
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 
