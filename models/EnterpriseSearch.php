@@ -70,4 +70,37 @@ class EnterpriseSearch extends Enterprise
 
         return $dataProvider;
     }
+    public function searchForEnterpriseId($params,$IdEnterprise)
+    {
+        $query = Enterprise::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+
+        #$query->andWhere(['IdProduct'=>$IdEnterprise]);
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'Id' => $this->Id,
+            'IdType' => $this->IdType,
+            'Latitude' => $this->Latitude,
+            'Longitude' => $this->Longitude,
+        ]);
+
+        $query->andFilterWhere(['like', 'Name', $this->Name])
+            ->andFilterWhere(['like', 'Address', $this->Address]);
+
+        return $dataProvider;
+    }
 }

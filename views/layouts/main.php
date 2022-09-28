@@ -40,6 +40,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
     if (Yii::$app->user->isGuest){
         $items[] = ['label' => 'Регистарция', 'url' => ['/user/create']];
         $items[] = ['label' => 'Авторизация', 'url' => ['/site/login']];
+        $items[] = ['label' => 'Магазин', 'url' => ['/shop']];
     }else{
         if(Yii::$app->user->identity->IdRole == 4)
         {
